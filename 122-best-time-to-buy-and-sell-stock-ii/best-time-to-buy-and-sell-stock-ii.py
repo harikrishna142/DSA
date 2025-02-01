@@ -3,10 +3,9 @@ class Solution:
         mi=prices[0]
         m=0
         for i in range(len(prices)):
-            mi=min(mi,prices[i])
             if prices[i]>mi:
                 m=m+(prices[i]-mi)
-                mi=prices[i]
+            mi=prices[i]
         return m
 
         
