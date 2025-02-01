@@ -21,5 +21,5 @@ class Solution:
                         return -1
                 j=j+1
                 i=(i+1)%n
-        return c
+    
         
