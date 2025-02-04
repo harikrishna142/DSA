@@ -10,10 +10,7 @@ class Solution:
                     r.pop()
             else:
                 r.append(s[i])
-        if len(r)==0:
-            return True
-        else:
-            return False
+        return len(r)==0
         
                     
 
