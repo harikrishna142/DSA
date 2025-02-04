@@ -1,7 +1,6 @@
 class Solution:
     def findMinArrowShots(self, points: List[List[int]]) -> int:
         points.sort()
-        print(points)
         i=0
         r=1
         mi=points[0][0]
@@ -16,6 +15,7 @@ class Solution:
                 i+=1
                 mi=points[i][0]
                 ma=points[i][1]
+          
         return r
             
 
