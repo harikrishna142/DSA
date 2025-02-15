@@ -3,7 +3,6 @@ class Solution:
         m=len(grid)
         n=len(grid[0])
         dp=[[0]*n for _ in range(m)]
-        print(dp)
         for i in range(m):
             for j in range(n):
                 if i==0 and j==0:
