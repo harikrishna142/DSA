@@ -1,7 +1,6 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
         n=len(nums)
-        
         j=0
         c=0
         f=0
