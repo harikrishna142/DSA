@@ -1,33 +1,31 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-
-        pre = defaultdict(list)
-
-        for course, p in prerequisites:
-            pre[course].append(p)
-        
-        taken = set()
-
-        def dfs(course):
-            if not pre[course]:
+        n=numCourses
+        pre=prerequisites
+        taken=set()
+        p=defaultdict(list)
+        for i in pre:
+            p[i[0]].append(i[1])
+        def dfs(c):
+            if not p[c]:
                 return True
-            
-            if course in taken:
+            if c in taken:
                 return False
-            
-            taken.add(course)
-
-            for p in pre[course]:
-                if not dfs(p): return False
-            
-            pre[course] = []
+            taken.add(c)
+            for j in p[c]:
+                if not dfs(j):
+                    return False
+            p[c]=[]
             return True
-        
-        for course in range(numCourses):
-            if not dfs(course):
-                return False
 
+        for i in range(n):
+            if not dfs(i):
+                return False
         return True
+
+        
+
+       
              
 
         
