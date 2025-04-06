@@ -1,18 +1,17 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         res=[]
-        com=[]
         candidates.sort()
-        def back(i):
-            if sum(com)==target and com not in res:
-                res.append(com[:])
+        def back(i,c,t):
+            if t==target:
+                res.append(c[:])
                 return
             for j in range(i,len(candidates)):
-                if sum(com)>target:
+                if t>target:
                     return
-                com.append(candidates[j])
-                back(j)
-                com.pop()
-        back(0)
+                c.append(candidates[j])
+                back(j,c,t+candidates[j])
+                c.pop()
+        back(0,[],0)
         return res
         
