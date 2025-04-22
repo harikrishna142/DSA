@@ -1,10 +1,8 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        s={}
+        f=defaultdict(int)
         for i in nums:
-            if i not in s:
-                s[i]=1
-            else:
-                s[i]+=1
-        return max(s, key=s.get)
-        
+            f[i]+=1
+        f=dict(sorted(f.items(), key=lambda x:x[1], reverse=True))
+        l=list(f.keys())
+        return l[0]
