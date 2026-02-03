@@ -1,41 +1,51 @@
 class Solution:
-    def constructDistancedSequence(self, n: int) -> List[int]:
-        res = [0] * (2 * n - 1)
-        used = [False] * (n + 1)
-        length = len(res)
+    def constructDistancedSequence(self, n: int) -> list[int]:
+        # Size of the sequence is 2*n - 1
+        size = 2 * n - 1
+        result = [0] * size
+        used = [False] * (n + 1) # Track numbers 1 to n
 
-        def backtrack(idx):
-            # If we've filled all positions, return True
-            if idx == length:
+        def backtrack(index):
+            # If we reached the end of the array, we found a valid sequence
+            if index == size:
                 return True
             
-            # If current position already filled, move to next
-            if res[idx] != 0:
-                return backtrack(idx + 1)
-
-            # Try placing numbers from n down to 1 for lexicographically largest
+            # If the current position is already filled, move to the next one
+            if result[index] != 0:
+                return backtrack(index + 1)
+            
+            # Try numbers from n down to 1 to ensure lexicographically largest result
             for num in range(n, 0, -1):
                 if used[num]:
                     continue
+                
+                # Handling the number 1 (appears only once)
                 if num == 1:
-                    res[idx] = 1
+                    result[index] = 1
                     used[1] = True
-                    if backtrack(idx + 1):
+                    if backtrack(index + 1):
                         return True
-                    res[idx] = 0
+                    
+                    # Backtrack
+                    result[index] = 0
                     used[1] = False
+                
+                # Handling numbers > 1 (appear twice at distance 'num')
                 else:
-                    j = idx + num
-                    if j < length and res[j] == 0:
-                        res[idx] = res[j] = num
+                    if index + num < size and result[index + num] == 0:
+                        result[index] = num
+                        result[index + num] = num
                         used[num] = True
-                        if backtrack(idx + 1):
+                        
+                        if backtrack(index + 1):
                             return True
-                        res[idx] = res[j] = 0
+                        
+                        # Backtrack
+                        result[index] = 0
+                        result[index + num] = 0
                         used[num] = False
+            
             return False
 
         backtrack(0)
-        return res
-
-        
+        return result
